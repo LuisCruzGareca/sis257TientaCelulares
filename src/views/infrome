@@ -1,0 +1,8 @@
+luego instalar el botstrap
+-npm i axios bootstrap
+
+
+luego creamos el plugins para la ruta
+
+5 creamos el models
+aqui creamos el modulo usuario y llamos a sus entidades
