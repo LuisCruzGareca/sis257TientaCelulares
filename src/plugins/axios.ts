@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/stores/indes'
+import { useAuthStore } from '@/stores'
 import Axios from 'axios'
 
 const axios = Axios.create({

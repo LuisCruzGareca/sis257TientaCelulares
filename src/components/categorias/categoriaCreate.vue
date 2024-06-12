@@ -8,13 +8,13 @@ const props = defineProps<{
 }>()
 
 const ENDPOINT = props.ENDPOINT_API ?? ''
-const email = ref('')
-const password = ref('')
+const descripcion = ref('')
+const nombre = ref('')
 
-async function crearUsuario() {
+async function crearCategoria() {
   await http
-    .post(ENDPOINT, { email: email.value, password: password.value })
-    .then(() => router.push('/usuarios'))
+    .post(ENDPOINT, { descripcion: descripcion.value, nombre: nombre.value })
+    .then(() => router.push('/categorias'))
 }
 
 function goBack() {
@@ -28,31 +28,37 @@ function goBack() {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/usuarios">Usuario</RouterLink>
+          <RouterLink to="/categorias">Categorias</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Crear</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Crear Nuevo Usuario</h2>
+      <h2>Crear Nuevo Categorias</h2>
     </div>
 
     <div class="row">
-      <form @submit.prevent="crearUsuario">
+      <form @submit.prevent="crearCategoria">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" v-model="email" placeholder="Email" required />
-          <label for="email">Email</label>
+          <input
+            type="descripcion"
+            class="form-control"
+            v-model="descripcion"
+            placeholder="descripcion"
+            required
+          />
+          <label for="descripcion">descripcion</label>
         </div>
         <div class="form-floating">
           <input
-            type="password"
+            type="nombre"
             class="form-control"
-            v-model="password"
-            placeholder="Password"
+            v-model="nombre"
+            placeholder="nombre"
             required
           />
-          <label for="password">Password</label>
+          <label for="nombre">nombre</label>
         </div>
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">

@@ -8,19 +8,19 @@ const props = defineProps<{
 }>()
 
 const ENDPOINT = props.ENDPOINT_API ?? ''
-const email = ref('')
-const password = ref('')
+const descripcion = ref('')
+const nombre = ref('')
 const id = router.currentRoute.value.params['id']
 
-async function editarUsuarios() {
+async function editarCategoria() {
   await http
-    .patch(`${ENDPOINT}/${id}`, { email: email.value, password: password.value })
-    .then(() => router.push('/usuarios'))
+    .patch(`${ENDPOINT}/${id}`, { descripcion: descripcion.value, nombre: nombre.value })
+    .then(() => router.push('/categorias'))
 }
 
-async function getUsuarios() {
+async function getCategoria() {
   await http.get(`${ENDPOINT}/${id}`).then((response) => {
-    ;(email.value = response.data.email), (password.value = response.data.password)
+    ;(descripcion.value = response.data.descripcion), (nombre.value = response.data.nombre)
   })
 }
 
@@ -29,7 +29,7 @@ function goBack() {
 }
 
 onMounted(() => {
-  getUsuarios()
+  getCategoria()
 })
 </script>
 
@@ -39,31 +39,31 @@ onMounted(() => {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/usuarios">Usuarios</RouterLink>
+          <RouterLink to="/categorias">Categorias</RouterLink>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Editar</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Editar Usuarios</h2>
+      <h2>Editar Categorias</h2>
     </div>
 
     <div class="row">
-      <form @submit.prevent="editarUsuarios">
+      <form @submit.prevent="editarCategoria">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" v-model="email" placeholder="Email" required />
-          <label for="email">Email</label>
-        </div>
-        <div class="form-floating">
           <input
             type="text"
             class="form-control"
-            v-model="password"
-            placeholder="Password"
+            v-model="descripcion"
+            placeholder="Descripcion"
             required
           />
-          <label for="password">Password</label>
+          <label for="descripcion">Descripcion</label>
+        </div>
+        <div class="form-floating">
+          <input type="text" class="form-control" v-model="nombre" placeholder="Nombre" required />
+          <label for="nombre">Nombre</label>
         </div>
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">

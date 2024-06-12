@@ -1,25 +1,35 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import http from '@/plugins/axios'
 import { router } from '@/router/router'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps<{
   ENDPOINT_API: string
 }>()
 
 const ENDPOINT = props.ENDPOINT_API ?? ''
-const email = ref('')
-const password = ref('')
+const nombre = ref('')
+const id = router.currentRoute.value.params['id']
 
-async function crearUsuario() {
+async function editarColores() {
   await http
-    .post(ENDPOINT, { email: email.value, password: password.value })
-    .then(() => router.push('/usuarios'))
+    .patch(`${ENDPOINT}/${id}`, { nombre: nombre.value })
+    .then(() => router.push('/colores'))
+}
+
+async function getColores() {
+  await http.get(`${ENDPOINT}/${id}`).then((response) => {
+    nombre.value = response.data.nombre
+  })
 }
 
 function goBack() {
   router.go(-1)
 }
+
+onMounted(() => {
+  getColores()
+})
 </script>
 
 <template>
@@ -28,35 +38,26 @@ function goBack() {
       <ol class="breadcrumb">
         <li class="breadcrumb-item"><RouterLink to="/">Inicio</RouterLink></li>
         <li class="breadcrumb-item">
-          <RouterLink to="/usuarios">Usuario</RouterLink>
+          <RouterLink to="/colores">Colores</RouterLink>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Crear</li>
+        <li class="breadcrumb-item active" aria-current="page">Editar</li>
       </ol>
     </nav>
 
     <div class="row">
-      <h2>Crear Nuevo Usuario</h2>
+      <h2>Editar Colores</h2>
     </div>
 
     <div class="row">
-      <form @submit.prevent="crearUsuario">
+      <form @submit.prevent="editarColores">
         <div class="form-floating mb-3">
-          <input type="text" class="form-control" v-model="email" placeholder="Email" required />
-          <label for="email">Email</label>
+          <input type="text" class="form-control" v-model="nombre" placeholder="Nombre" required />
+          <label for="nombre">Nombre</label>
         </div>
-        <div class="form-floating">
-          <input
-            type="password"
-            class="form-control"
-            v-model="password"
-            placeholder="Password"
-            required
-          />
-          <label for="password">Password</label>
-        </div>
+
         <div class="text-center mt-3">
           <button type="submit" class="btn btn-primary btn-lg">
-            <font-awesome-icon icon="fa-solid fa-save" /> Crear
+            <font-awesome-icon icon="fa-solid fa-save" /> Guardar
           </button>
         </div>
       </form>

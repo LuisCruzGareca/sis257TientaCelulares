@@ -1,19 +1,23 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { router } from './router/router'
+
+if (!localStorage.getItem('token')) {
+  router.push('/')
+}
 </script>
 
 <template>
   <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
+      <nav id="menu">
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/Usuarios">Usuario</RouterLink>
+        <RouterLink to="/usuarios">Usuario</RouterLink>
+        <RouterLink to="/celulares">Celulares</RouterLink>
+        <RouterLink to="/colores">Colores</RouterLink>
+        <RouterLink to="/categorias">Categorias</RouterLink>
+        <RouterLink to="/compras">Compras</RouterLink>
       </nav>
     </div>
   </header>

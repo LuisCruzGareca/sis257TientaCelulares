@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia'
 
 import http from '@/plugins/axios'
-import router from '@/router'
+import { router } from '@/router/router'
 import { getTokenFromLocalStorage } from '@/assets/helpers'
-
 
 const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -14,15 +13,20 @@ const useAuthStore = defineStore('auth', {
   getters: {},
   actions: {
     async login(usuario: string, clave: string) {
-      await http.post('auth/login', { usuario, clave }).then((response) => {
-        this.user = response.data.usuario
-        this.token = response.data.access_token
+      await http
+        .post('auth/login', {
+          email: usuario,
+          password: clave
+        })
+        .then((response) => {
+          this.user = response.data.usuario
+          this.token = response.data.access_token
 
-        localStorage.setItem('user', this.user || '')
-        localStorage.setItem('token', this.token || '')
+          localStorage.setItem('user', this.user || '')
+          localStorage.setItem('token', this.token || '')
 
-        router.push(this.returnUrl || '/')
-      })
+          router.push('/celulares')
+        })
     },
     logout() {
       localStorage.clear()
