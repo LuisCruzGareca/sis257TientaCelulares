@@ -43,57 +43,40 @@ onMounted(() => {
     <div class="row">
       <h2>Lista de Colores</h2>
       <div class="col-12">
-        <RouterLink to="/colores/crear"
-          ><font-awesome-icon icon="fa-solid fa-plus" /> Crear Nuevo</RouterLink
-        >
+        <RouterLink to="/colores/crear" class="btn btn-primary">
+          <i class="fas fa-plus"></i> Crear Nuevo
+        </RouterLink>
       </div>
     </div>
 
     <div class="table-responsive">
-      <table class="table table-bordered">
-        <thead>
+      <table class="table table-hover">
+        <caption>
+          Lista de Colores
+        </caption>
+        <thead class="thead-light">
           <tr>
             <th scope="col">N°</th>
-            <th scope="col">nombre</th>
-            <th scope="col">acciones</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="(colors, index) in colors.values()" :key="colors.id">
-            <th scope="row">{{ index + 1 }}</th>
+            <td>{{ index + 1 }}</td>
             <td>{{ colors.nombre }}</td>
             <td>
-              <button class="btn btn-link" @click="toEdit(colors.id)">
+              <button class="btn btn-primary me-2" @click="toEdit(colors.id)">
                 Editar
-                <font-awesome-icon icon="fa-solid fa-edit" /></button
-              ><br />
-              <button class="btn btn-link" @click="toDelete(colors.id)">
+                <font-awesome-icon icon="fa-solid fa-edit" />
+              </button>
+              <button class="btn btn-danger" @click="toDelete(colors.id)">
                 Eliminar
                 <font-awesome-icon icon="fa-solid fa-trash" />
               </button>
             </td>
           </tr>
         </tbody>
-
-        <!-- 
-
-         <tbody>
-          <tr v-for="(usuario, index) in usuarios.values()" :key="usuario.id">
-            <th scope="row">{{ index + 1 }}</th>
-            <td>{{ usuario.email }}</td>
-            <td>{{ usuario.password }}</td>
-            <td>
-              <button class="btn btn-link" @click="toEdit(usuario.id)">
-                Editar
-                <font-awesome-icon icon="fa-solid fa-edit" />
-              </button>
-              <button class="btn btn-link" @click="toDelete(usuario.id)">
-                Eliminar
-                <font-awesome-icon icon="fa-solid fa-trash" />
-              </button>
-            </td>
-          </tr>
-        </tbody> -->
       </table>
     </div>
   </div>

@@ -88,26 +88,6 @@ onMounted(() => {
             </td>
           </tr>
         </tbody>
-
-        <!-- 
-
-         <tbody>
-          <tr v-for="(usuario, index) in usuarios.values()" :key="usuario.id">
-            <th scope="row">{{ index + 1 }}</th>
-            <td>{{ usuario.email }}</td>
-            <td>{{ usuario.password }}</td>
-            <td>
-              <button class="btn btn-link" @click="toEdit(usuario.id)">
-                Editar
-                <font-awesome-icon icon="fa-solid fa-edit" />
-              </button>
-              <button class="btn btn-link" @click="toDelete(usuario.id)">
-                Eliminar
-                <font-awesome-icon icon="fa-solid fa-trash" />
-              </button>
-            </td>
-          </tr>
-        </tbody> -->
       </table>
     </div>
   </div>
